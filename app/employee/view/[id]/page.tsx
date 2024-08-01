@@ -8,9 +8,22 @@ export default function Page({ params }: { params: { id: string } }) {
     return (
         <div className="">
             <div className="w-full -z-10 h-[25vh] bg-gradient-to-b from-blue-500 to-blue-700 relative py-6 px-[20%]">
-                <h1 className="font-bold text-3xl text-white">
-                    Employee Details
-                </h1>
+                <div className="flex items-center justify-between">
+                    <h1 className="font-bold text-3xl text-white">
+                        Employee Details
+                    </h1>
+                    <div className="flex items-center gap-2">
+                        <p className="text-slate-600 font-medium bg-gray-100 py-[3px] px-4 border border-gray-400">
+                            Employee ID: EMP001
+                        </p>
+                        {/* <p className="text-slate-600 font-medium bg-gray-100 py-[3px] px-4 border border-gray-400">
+                            Manager ID: EMP-MNG-001
+                        </p> */}
+                        <div className="py-[3px] px-6 bg-green-300 border-green-500 border">
+                            Active
+                        </div>
+                    </div>
+                </div>
                 <div className="h-[150px] w-[150px] rounded-full bg-white absolute top-full -translate-y-1/2 left-[20%] border overflow-hidden shadow">
                     <Image
                         src={ProfilePlaceholder}
@@ -27,17 +40,6 @@ export default function Page({ params }: { params: { id: string } }) {
                         <p className="text-slate-500 text-xl font-medium pb-2 border-b-2">
                             Basic Information
                         </p>
-                        <div className="mt-4 flex items-center gap-4">
-                            <p className="text-slate-600 font-medium bg-gray-100 py-[3px] px-4 border border-gray-400">
-                                Employee ID: EMP001
-                            </p>
-                            <p className="text-slate-600 font-medium bg-gray-100 py-[3px] px-4 border border-gray-400">
-                                Manager ID: EMP-MNG-001
-                            </p>
-                            <div className="py-[3px] px-6 bg-green-400/20 border-green-500 border">
-                                Active
-                            </div>
-                        </div>
                         <div className="flex items-center gap-4 mt-6">
                             <div className="flex-1 grid w-full items-center gap-2">
                                 <Label htmlFor="fname">First Name</Label>
