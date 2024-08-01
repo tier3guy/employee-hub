@@ -1,5 +1,6 @@
 import EmployeeTable from "@/components/employee-table";
 import Topbar from "@/components/topbar";
+import EmployeeProvider from "@/providers/employee-provider";
 
 export default function Page() {
     return (
@@ -8,7 +9,9 @@ export default function Page() {
             <div className="min-h-screen w-full overflow-x-hidden p-6">
                 <Topbar />
                 <div className="w-full my-6">
-                    <EmployeeTable />
+                    <EmployeeProvider>
+                        <EmployeeTable />
+                    </EmployeeProvider>
                 </div>
             </div>
         </div>

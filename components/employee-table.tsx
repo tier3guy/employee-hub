@@ -9,15 +9,14 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import Badge from "./badge";
-import { useState } from "react";
-import IEmployee from "@/types/table-employee-type";
-import { employees } from "@/assests/dummy-employees";
 import TableFooter from "./table-footer";
 import { Eye } from "lucide-react";
 import Link from "next/link";
+import { useEmployee } from "@/providers/employee-provider";
+import TableRowsLoader from "./loaders/table-rows-loader";
 
 export default function EmployeeTable() {
-    const [data, setData] = useState<IEmployee[]>(employees);
+    const { employeeList: data, loading } = useEmployee();
 
     return (
         <div>
@@ -35,31 +34,31 @@ export default function EmployeeTable() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data.map((emp) => (
-                            <TableRow
-                                key={emp.id}
-                                className="hover:bg-slate-50"
-                            >
-                                <TableCell>{emp.id}</TableCell>
-                                <TableCell>{emp.name}</TableCell>
-                                <TableCell>{emp.position}</TableCell>
-                                <TableCell>{emp.department}</TableCell>
-                                <TableCell>{emp.joiningDate}</TableCell>
-                                <TableCell>
-                                    <Badge type={emp.status} />
-                                </TableCell>
-                                <TableCell className="flex items-center justify-end gap-2">
-                                    <Link
-                                        href={
-                                            "/employee/view/" +
-                                            emp.id.toLowerCase()
-                                        }
-                                    >
-                                        <Eye className="h-4 w-4 text-gray-600" />
-                                    </Link>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {loading && <TableRowsLoader />}
+
+                        {!loading &&
+                            data.map((emp) => (
+                                <TableRow
+                                    key={emp.id}
+                                    className="hover:bg-slate-50"
+                                >
+                                    <TableCell>{emp?.employee_id}</TableCell>
+                                    <TableCell>
+                                        {emp?.first_name + " " + emp?.last_name}
+                                    </TableCell>
+                                    <TableCell>{emp.position}</TableCell>
+                                    <TableCell>{emp.department}</TableCell>
+                                    <TableCell>{emp.date_of_joining}</TableCell>
+                                    <TableCell>
+                                        <Badge type={emp.status} />
+                                    </TableCell>
+                                    <TableCell className="flex items-center justify-end gap-2">
+                                        <Link href={"/employee/view/" + emp.id}>
+                                            <Eye className="h-4 w-4 text-gray-600" />
+                                        </Link>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
                     </TableBody>
                 </Table>
             </div>

@@ -1,14 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 export default function middleware(request: NextRequest) {
-    const isAuthRoute = request.url.includes("auth");
+    // const isAuthRoute = request.url.includes("auth");
 
-    const cookieName = process.env.COOKIE_NAME!;
-    const token = request.cookies.get(cookieName);
+    // const cookieName = process.env.COOKIE_NAME!;
+    // const token = request.cookies.get(cookieName);
 
-    if (!token && !isAuthRoute) {
-        return NextResponse.redirect(new URL("/auth/login", request.url));
-    }
+    // if (!token && !isAuthRoute) {
+    //     return NextResponse.redirect(new URL("/auth/login", request.url));
+    // }
     return NextResponse.next();
 }
 

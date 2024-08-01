@@ -2,7 +2,7 @@ interface ISignupForm {
     organizationName: string;
     email: string;
     password: string;
-    cPassowrd: string;
+    cPassword: string;
 }
 
 export default ISignupForm;

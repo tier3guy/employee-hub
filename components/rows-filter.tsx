@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { useEmployee } from "@/providers/employee-provider";
 
 const rowsPerPage = [
     {
@@ -43,8 +44,8 @@ const rowsPerPage = [
 ];
 
 export default function RowsFilter() {
+    const { rowsPerPage: value, changeRowsPerPage } = useEmployee();
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(10);
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -53,7 +54,7 @@ export default function RowsFilter() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-[80px] justify-between"
+                    className="w-[80px] justify-between rounded-none"
                 >
                     {value
                         ? rowsPerPage.find((rows) => rows.value === value)
@@ -62,35 +63,32 @@ export default function RowsFilter() {
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-[80px] p-0">
+            <PopoverContent className="w-[80px] p-0 rounded-none">
                 <Command>
-                    <CommandList>
-                        <CommandGroup>
-                            {rowsPerPage.map((rows) => (
-                                <CommandItem
-                                    key={rows.value}
-                                    value={rows.value.toString()}
-                                    onSelect={(currentValue) => {
-                                        setValue(
-                                            parseInt(currentValue) === value
-                                                ? 0
-                                                : parseInt(currentValue)
-                                        );
-                                        setOpen(false);
-                                    }}
-                                >
-                                    <Check
-                                        className={cn(
-                                            "mr-2 h-4 w-4",
-                                            value === rows.value
-                                                ? "opacity-100"
-                                                : "opacity-0"
-                                        )}
-                                    />
-                                    {rows.label}
-                                </CommandItem>
-                            ))}
-                        </CommandGroup>
+                    <CommandList className="z-10 rounded-none p-1">
+                        {rowsPerPage.map((rows) => (
+                            <button
+                                key={rows.value}
+                                onClick={() => {
+                                    changeRowsPerPage(rows.value);
+                                    setOpen(false);
+                                }}
+                                className={cn(
+                                    "w-full flex items-center text-slate-400 text-sm p-1",
+                                    value === rows.value && "bg-slate-100"
+                                )}
+                            >
+                                <Check
+                                    className={cn(
+                                        "mr-2 h-4 w-4",
+                                        value === rows.value
+                                            ? "opacity-100"
+                                            : "opacity-0"
+                                    )}
+                                />
+                                {rows.label}
+                            </button>
+                        ))}
                     </CommandList>
                 </Command>
             </PopoverContent>
