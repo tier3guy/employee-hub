@@ -6,10 +6,10 @@ import {
 } from "lucide-react";
 import RowsFilter from "./rows-filter";
 import { Button } from "./ui/button";
-import { useEmployee } from "@/providers/employee-provider";
+import { useEmployeeTable } from "@/providers/employee-table-provider";
 
 export default function TableFooter() {
-    const { currentPage, changePage, totalPages } = useEmployee();
+    const { currentPage, changePage, totalPages } = useEmployeeTable();
 
     return (
         <div className="w-full flex items-center justify-between relative text-sm">

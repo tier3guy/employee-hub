@@ -12,17 +12,19 @@ import Badge from "./badge";
 import TableFooter from "./table-footer";
 import { Eye } from "lucide-react";
 import Link from "next/link";
-import { useEmployee } from "@/providers/employee-provider";
+import { useEmployeeTable } from "@/providers/employee-table-provider";
 import TableRowsLoader from "./loaders/table-rows-loader";
+import EmptyTablePlaceholder from "./empty-table-placeholder";
 
 export default function EmployeeTable() {
-    const { employeeList: data, loading } = useEmployee();
+    const { employeeList: data, loading } = useEmployeeTable();
 
     return (
         <div>
-            <div className="bg-white shadow-md h-[72vh] overflow-y-auto">
+            <div className="bg-white shadow-md h-[72vh] overflow-y-auto relative">
+                {!loading && !data.length && <EmptyTablePlaceholder />}
                 <Table>
-                    <TableHeader className="bg-slate-100 hover:bg-slate-100 h-[60px]">
+                    <TableHeader className="bg-slate-100 hover:bg-slate-100 h-[60px] z-20">
                         <TableRow>
                             <TableHead className="w-[100px]">EID</TableHead>
                             <TableHead>Employee Name</TableHead>
@@ -39,7 +41,7 @@ export default function EmployeeTable() {
                         {!loading &&
                             data.map((emp) => (
                                 <TableRow
-                                    key={emp.id}
+                                    key={emp._id}
                                     className="hover:bg-slate-50"
                                 >
                                     <TableCell>{emp?.employee_id}</TableCell>
@@ -53,7 +55,9 @@ export default function EmployeeTable() {
                                         <Badge type={emp.status} />
                                     </TableCell>
                                     <TableCell className="flex items-center justify-end gap-2">
-                                        <Link href={"/employee/view/" + emp.id}>
+                                        <Link
+                                            href={"/employee/view/" + emp?._id}
+                                        >
                                             <Eye className="h-4 w-4 text-gray-600" />
                                         </Link>
                                     </TableCell>

@@ -1,9 +1,11 @@
 interface IEmployee {
-    id: string;
-    name: string;
+    _id: string;
+    employee_id: string;
+    first_name: string;
+    last_name: string;
     position: string;
     department: string;
-    joiningDate: string;
+    date_of_joining: string;
     status: "Active" | "Inactive";
 }
 

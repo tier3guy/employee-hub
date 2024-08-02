@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { useEmployee } from "@/providers/employee-provider";
+import { useEmployeeTable } from "@/providers/employee-table-provider";
 
 const rowsPerPage = [
     {
@@ -44,7 +44,7 @@ const rowsPerPage = [
 ];
 
 export default function RowsFilter() {
-    const { rowsPerPage: value, changeRowsPerPage } = useEmployee();
+    const { rowsPerPage: value, changeRowsPerPage } = useEmployeeTable();
     const [open, setOpen] = useState(false);
 
     return (

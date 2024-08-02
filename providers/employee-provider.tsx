@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "@/axios.config";
-import IEmployee from "@/types/table-employee-type";
 import {
     createContext,
     useCallback,
@@ -9,17 +8,13 @@ import {
     useEffect,
     useState,
 } from "react";
+import { usePathname } from "next/navigation";
+import IEmployee from "@/types/employee-type";
 
 interface EmployeeContextInterface {
-    employeeList: any[];
+    data: IEmployee | null;
     loading: boolean;
     error: string;
-    changePage: (page: number) => void;
-    changeRowsPerPage: (rows: number) => void;
-    currentPage: number;
-    totalRows: number;
-    totalPages: number;
-    rowsPerPage: number;
 }
 
 export const EmployeeContext = createContext<EmployeeContextInterface | null>(
@@ -31,26 +26,20 @@ export default function EmployeeProvider({
 }: {
     children: React.ReactNode;
 }) {
+    const pathname = usePathname();
+    const id = pathname.split("/")[3];
+
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const [data, setData] = useState<IEmployee | null>(null);
 
-    const [totalRows, setTotalRows] = useState<number>(0);
-    const [totalPages, setTotalPages] = useState<number>(1);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-    const [employeeList, setEmployeeList] = useState<IEmployee[]>([]);
-
-    const fetchEmployees = useCallback(async () => {
+    const fetchEmployee = useCallback(async () => {
         try {
             setLoading(true);
-            const offset = (currentPage - 1) * rowsPerPage;
-            const resp = await axios.get(
-                `/employee?limit=${rowsPerPage}&offset=${offset}`
-            );
+            const resp = await axios.get(`/employee/${id}`);
 
             if (resp.status === 200) {
-                setEmployeeList(resp.data?.data);
-                setTotalRows(resp.data?.page?.total);
+                setData(resp.data);
             } else {
                 setError("Failed to fetch employees");
                 console.log(resp);
@@ -61,36 +50,18 @@ export default function EmployeeProvider({
         } finally {
             setLoading(false);
         }
-    }, [currentPage, rowsPerPage]);
-
-    const changePage = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const changeRowsPerPage = (rows: number) => {
-        setRowsPerPage(rows);
-    };
+    }, [id]);
 
     useEffect(() => {
-        setTotalPages(totalRows / rowsPerPage);
-    }, [rowsPerPage, totalRows, employeeList]);
-
-    useEffect(() => {
-        fetchEmployees();
-    }, [fetchEmployees]);
+        fetchEmployee();
+    }, [fetchEmployee]);
 
     return (
         <EmployeeContext.Provider
             value={{
-                employeeList,
+                data,
                 loading,
                 error,
-                changePage,
-                changeRowsPerPage,
-                currentPage,
-                totalPages,
-                totalRows,
-                rowsPerPage,
             }}
         >
             {children}
