@@ -71,3 +71,7 @@
 .debug {
     @apply border-4 border-red-700;
 }
+
+#create_form_sheet::-webkit-scrollbar {
+    width: 0px;
+}

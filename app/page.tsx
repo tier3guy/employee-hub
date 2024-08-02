@@ -11,7 +11,7 @@ export default function Page() {
     const { open, setOpen } = useModal();
 
     return (
-        <>
+        <Sheet open={open} onOpenChange={setOpen}>
             <div className="h-screen w-screen overflow-hidden relative">
                 <div className="h-[40%] w-full absolute top-0 left-0 -z-10 bg-gradient-to-b from-blue-500 to-blue-700" />
                 <div className="min-h-screen w-full overflow-x-hidden p-6">
@@ -23,9 +23,7 @@ export default function Page() {
                     </div>
                 </div>
             </div>
-            <Sheet open={open} onOpenChange={setOpen}>
-                <CreateTaskSheet />
-            </Sheet>
-        </>
+            <CreateTaskSheet />
+        </Sheet>
     );
 }

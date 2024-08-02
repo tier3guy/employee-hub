@@ -1,3 +1,5 @@
+import AddEmployeeButton from "./add-employee-button";
+
 export default function Topbar() {
     return (
         <div className="flex justify-between w-full">
@@ -10,6 +12,7 @@ export default function Topbar() {
                         organization!`}
                 </p>
             </div>
+            <AddEmployeeButton />
         </div>
     );
 }

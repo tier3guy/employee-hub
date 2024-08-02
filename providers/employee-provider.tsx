@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 import IEmployee from "@/types/employee-type";
 
 interface EmployeeContextInterface {
-    data: IEmployee | null;
+    data: IEmployee;
     loading: boolean;
     error: string;
 }
@@ -31,12 +31,39 @@ export default function EmployeeProvider({
 
     const [error, setError] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
-    const [data, setData] = useState<IEmployee | null>(null);
+    const [data, setData] = useState<IEmployee>({
+        status: "",
+        first_name: "",
+        last_name: "",
+        date_of_birth: "",
+        contact_methods: {
+            contact_method: "",
+            value: "",
+        },
+        emergency_contact: {
+            name: "",
+            phone_number: "",
+        },
+        position: "",
+        department: "",
+        date_of_joining: "",
+        salary: {
+            amount: "",
+            currency: "",
+        },
+        address: {
+            street: "",
+            city: "",
+            state: "",
+            postal_code: "",
+            country: "",
+        },
+    });
 
     const fetchEmployee = useCallback(async () => {
         try {
             setLoading(true);
-            const resp = await axios.get(`/employee/${id}`);
+            const resp = await axios.get(`/employees/${id}`);
 
             if (resp.status === 200) {
                 setData(resp.data);

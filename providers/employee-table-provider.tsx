@@ -31,10 +31,10 @@ export default function EmployeeTableProvider({
     children: React.ReactNode;
 }) {
     const [error, setError] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const [totalRows, setTotalRows] = useState<number>(0);
-    const [totalPages, setTotalPages] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [employeeList, setEmployeeList] = useState<IEmployee[]>([]);
@@ -44,11 +44,11 @@ export default function EmployeeTableProvider({
             setLoading(true);
             const offset = (currentPage - 1) * rowsPerPage;
             const resp = await axios.get(
-                `/employee?limit=${rowsPerPage}&offset=${offset}`
+                `/employees?limit=${rowsPerPage}&offset=${offset}`
             );
 
             if (resp.status === 200) {
-                // setEmployeeList(resp.data?.data);
+                setEmployeeList(resp.data?.data);
                 setTotalRows(resp.data?.page?.total);
             } else {
                 setError("Failed to fetch employees");
@@ -71,7 +71,9 @@ export default function EmployeeTableProvider({
     };
 
     useEffect(() => {
-        setTotalPages(totalRows / rowsPerPage);
+        const count = Math.ceil(totalRows / rowsPerPage);
+        const pages = count > 0 ? count : 1;
+        setTotalPages(pages);
     }, [rowsPerPage, totalRows, employeeList]);
 
     useEffect(() => {

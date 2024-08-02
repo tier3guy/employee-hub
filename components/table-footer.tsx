@@ -35,7 +35,7 @@ export default function TableFooter() {
                     <Button
                         variant="outline"
                         className="p-2 py-1 border-none"
-                        disabled={currentPage === 1}
+                        disabled={currentPage <= 1}
                         onClick={() => {
                             changePage(currentPage - 1);
                         }}

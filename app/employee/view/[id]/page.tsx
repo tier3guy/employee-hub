@@ -3,22 +3,39 @@
 import Image from "next/image";
 import ProfilePlaceholder from "@/public/profile-placeholder.png";
 
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useEffect, useState } from "react";
 import IEmployee from "@/types/employee-type";
+import { Button } from "@/components/ui/button";
+import BackButton from "@/components/back-button";
 import { useEmployee } from "@/providers/employee-provider";
 import EmployeeFormLoader from "@/components/loaders/employee-form-loader";
-import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import DeleteEmployeeDialog from "@/components/dialogs/delete-employee-dialog";
+import EmployeeStatusPicker from "@/components/employee-status-picker";
+import UpdateEmployee from "@/actions/update-employee";
 
 export default function Page() {
     const { data, loading } = useEmployee();
-    const [formData, setFormData] = useState<IEmployee | null>(data);
+    const [formData, setFormData] = useState<IEmployee>(data);
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         //@ts-ignore
         setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    };
+
+    const handleUpdate = async () => {
+        let body = formData;
+        delete body._id;
+
+        const resp = await UpdateEmployee(data?._id!, body);
+        if (resp) {
+            toast.success("Employee updated successfully");
+        } else {
+            toast.error("Failed to update employee");
+        }
     };
 
     useEffect(() => {
@@ -27,11 +44,14 @@ export default function Page() {
 
     return (
         <div className="">
-            <div className="w-full -z-10 h-[25vh] bg-gradient-to-b from-blue-500 to-blue-700 relative py-6 px-[20%]">
-                <div className="flex items-center justify-between">
-                    <h1 className="font-bold text-3xl text-white">
-                        Employee Details
-                    </h1>
+            <div className="w-full h-[25vh] bg-gradient-to-b from-blue-500 to-blue-700 relative py-6 px-[20%]">
+                <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-4">
+                        <BackButton />
+                        <h1 className="font-bold text-3xl text-white">
+                            Employee Details
+                        </h1>
+                    </div>
                 </div>
                 <div className="h-[150px] w-[150px] rounded-full bg-white absolute top-full -translate-y-1/2 left-[20%] border overflow-hidden shadow">
                     <Image
@@ -119,15 +139,37 @@ export default function Page() {
                                         name="employee_id"
                                         onChange={handleOnChange}
                                         className="text-md font-medium"
+                                        disabled
                                     />
                                 </div>
                                 <div className="flex-1 grid w-full items-center gap-2">
-                                    <Label htmlFor="employment">
-                                        Employment
-                                    </Label>
-                                    <div className="p-[8.5px] px-4 border-2 text-sm border-gray-100">
-                                        Active
-                                    </div>
+                                    <EmployeeStatusPicker
+                                        value={formData.status}
+                                        setValue={setFormData}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4 mt-6">
+                                <div className="flex-1 grid w-full items-center gap-2">
+                                    <Label htmlFor="fname">Salary (INR)</Label>
+                                    <Input
+                                        type="number"
+                                        id="salary"
+                                        placeholder="66000"
+                                        value={formData?.salary.amount}
+                                        name="salary"
+                                        onChange={(e) => {
+                                            //@ts-ignore
+                                            setFormData((prev) => ({
+                                                ...prev,
+                                                salary: {
+                                                    amount: e.target.value,
+                                                    currency: "INR",
+                                                },
+                                            }));
+                                        }}
+                                        className="text-md font-medium"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -278,31 +320,14 @@ export default function Page() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex flex-col">
-                            <p className="text-slate-500 text-xl font-medium pb-2 border-b-2">
-                                Skills
-                            </p>
-                            <div className="flex flex-wrap items-center gap-2 mt-6">
-                                {formData.skills.map((skill) => (
-                                    <p
-                                        key={skill}
-                                        className="text-slate-600 font-medium bg-gray-100 py-[3px] px-4 border border-gray-400"
-                                    >
-                                        {skill}
-                                    </p>
-                                ))}
-                            </div>
-                        </div>
                         <div className="flex items-center gap-3  mt-6">
-                            <Button className="rounded-none px-6 py-3 w-[200px] text-base shadow-xl">
-                                Update
-                            </Button>
                             <Button
-                                variant={"destructive"}
+                                onClick={handleUpdate}
                                 className="rounded-none px-6 py-3 w-[200px] text-base shadow-xl"
                             >
-                                Delete
+                                Update
                             </Button>
+                            <DeleteEmployeeDialog />
                         </div>
                     </div>
                 )}
