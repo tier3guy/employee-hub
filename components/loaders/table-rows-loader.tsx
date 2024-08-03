@@ -17,7 +17,7 @@ export default function TableRowsLoader({ rows = 8 }: Props) {
 
 export function TableRowLoader() {
     return (
-        <TableRow className="w-full ">
+        <TableRow className="w-full">
             <TableCell>
                 <Skeleton className="h-[15px] bg-gray-200" />
             </TableCell>

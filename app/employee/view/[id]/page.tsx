@@ -43,7 +43,7 @@ export default function Page() {
 
     return (
         <div className="">
-            <div className="w-full h-[25vh] bg-gradient-to-b from-blue-500 to-blue-700 relative py-6 px-[20%]">
+            <div className="w-full h-[25vh] bg-gradient-to-b from-blue-500 to-blue-700 relative py-6 px-4 md:px-[20%]">
                 <div className="flex flex-col gap-1">
                     <div className="flex items-center gap-4">
                         <BackButton />
@@ -52,7 +52,7 @@ export default function Page() {
                         </h1>
                     </div>
                 </div>
-                <div className="h-[150px] w-[150px] rounded-full bg-white absolute top-full -translate-y-1/2 left-[20%] border overflow-hidden shadow">
+                <div className="h-[150px] w-[150px] rounded-full bg-white absolute top-full -translate-y-1/2 md:left-[20%] md:-translate-x-0 left-1/2 -translate-x-1/2 border overflow-hidden shadow">
                     <Image
                         src={ProfilePlaceholder}
                         height={150}
@@ -62,7 +62,7 @@ export default function Page() {
                     />
                 </div>
             </div>
-            <div className="mt-[100px] mb-6 px-[20%]">
+            <div className="mt-[100px] mb-6 px-4 md:px-[20%]">
                 {loading && <EmployeeFormLoader />}
                 {!loading && formData && (
                     <div className="flex flex-col w-full gap-6">
@@ -70,7 +70,7 @@ export default function Page() {
                             <p className="text-slate-500 text-xl font-medium pb-2 border-b-2">
                                 Basic Information
                             </p>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="fname">First Name</Label>
                                     <Input
@@ -96,7 +96,7 @@ export default function Page() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="job-role">Job Role</Label>
                                     <Input
@@ -127,7 +127,7 @@ export default function Page() {
                             <p className="text-slate-500 text-xl font-medium pb-2 border-b-2">
                                 Employment Information
                             </p>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="fname">Employee ID</Label>
                                     <Input
@@ -148,7 +148,7 @@ export default function Page() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="fname">Salary (INR)</Label>
                                     <Input
@@ -176,16 +176,7 @@ export default function Page() {
                             <p className="text-slate-500 text-xl font-medium pb-2 border-b-2">
                                 Contact Information
                             </p>
-                            <div className="flex items-center gap-4 mt-6">
-                                {/* <div className="flex-1 grid w-full items-center gap-2">
-                                    <Label htmlFor="phone">Phone Number</Label>
-                                    <Input
-                                        type="number"
-                                        id="phone"
-                                        placeholder="+12 34567 89101"
-                                        value={formData.contact_methods.value}
-                                    />
-                                </div> */}
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="email">Email</Label>
                                     <Input
@@ -212,7 +203,7 @@ export default function Page() {
                             <p className="text-slate-500 text-xl font-medium pb-2 border-b-2">
                                 Address
                             </p>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="line1">Line 1</Label>
                                     <Input
@@ -234,7 +225,7 @@ export default function Page() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="city">City</Label>
                                     <Input
@@ -276,7 +267,7 @@ export default function Page() {
                                     />
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 mt-6">
+                            <div className="flex items-center gap-4 mt-6 md:flex-row flex-col">
                                 <div className="flex-1 grid w-full items-center gap-2">
                                     <Label htmlFor="zip">Zip Code</Label>
                                     <Input
