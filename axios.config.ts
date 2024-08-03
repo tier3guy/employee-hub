@@ -1,4 +1,3 @@
-// axios.config.ts
 import _axios from "axios";
 
 const axios = _axios.create({
@@ -19,4 +18,5 @@ axios.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
 export default axios;

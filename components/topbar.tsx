@@ -1,4 +1,4 @@
-import AddEmployeeButton from "./add-employee-button";
+import AddEmployeeButton from "./buttons/add-employee-button";
 
 export default function Topbar() {
     return (

@@ -1,11 +1,11 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { TableCell, TableRow } from "../ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
     rows?: number;
 }
 
-export default function TableRowsLoader({ rows = 5 }: Props) {
+export default function TableRowsLoader({ rows = 8 }: Props) {
     return (
         <>
             {Array.from("G".repeat(rows)).map((_, i) => {

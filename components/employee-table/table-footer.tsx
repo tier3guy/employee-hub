@@ -5,7 +5,7 @@ import {
     ChevronsRight,
 } from "lucide-react";
 import RowsFilter from "./rows-filter";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useEmployeeTable } from "@/providers/employee-table-provider";
 
 export default function TableFooter() {

@@ -1,11 +1,11 @@
 "use client";
 
-import CreateTaskSheet from "@/components/create-task-sheet";
-import EmployeeTable from "@/components/employee-table";
 import Topbar from "@/components/topbar";
 import { Sheet } from "@/components/ui/sheet";
-import EmployeeProvider from "@/providers/employee-table-provider";
 import { useModal } from "@/providers/modal-provider";
+import EmployeeTable from "@/components/employee-table/employee-table";
+import CreateTaskSheet from "@/components/create-task-sheet";
+import EmployeeProvider from "@/providers/employee-table-provider";
 
 export default function Page() {
     const { open, setOpen } = useModal();

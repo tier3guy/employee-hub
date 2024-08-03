@@ -1,17 +1,15 @@
 "use client";
 
+import { toast } from "sonner";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogHeader,
-    DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import DeleteEmployee from "@/actions/delete-employee";
 import { useRouter } from "next/navigation";
+import DeleteEmployee from "@/actions/delete-employee";
 import { useEmployee } from "@/providers/employee-provider";
-import { toast } from "sonner";
 
 export default function DeleteEmployeeDialog() {
     const router = useRouter();

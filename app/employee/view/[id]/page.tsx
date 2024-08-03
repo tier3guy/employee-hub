@@ -1,20 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import ProfilePlaceholder from "@/public/profile-placeholder.png";
-
+import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import IEmployee from "@/types/employee-type";
 import { Button } from "@/components/ui/button";
-import BackButton from "@/components/back-button";
-import { useEmployee } from "@/providers/employee-provider";
-import EmployeeFormLoader from "@/components/loaders/employee-form-loader";
-import { toast } from "sonner";
-import DeleteEmployeeDialog from "@/components/dialogs/delete-employee-dialog";
-import EmployeeStatusPicker from "@/components/employee-status-picker";
+import BackButton from "@/components/buttons/back-button";
 import UpdateEmployee from "@/actions/update-employee";
+import { useEmployee } from "@/providers/employee-provider";
+import ProfilePlaceholder from "@/public/profile-placeholder.png";
+import EmployeeStatusPicker from "@/components/employee-status-picker";
+import EmployeeFormLoader from "@/components/loaders/employee-form-loader";
+import DeleteEmployeeDialog from "@/components/dialogs/delete-employee-dialog";
 
 export default function Page() {
     const { data, loading } = useEmployee();

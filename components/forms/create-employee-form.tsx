@@ -1,14 +1,14 @@
 "use client";
 
+import { toast } from "sonner";
 import { useState } from "react";
-import ContactMethodPicker from "../contact-method-picker";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 import IEmployee from "@/types/employee-type";
 import CreateEmployee from "@/actions/create-employee";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import ContactMethodPicker from "../contact-method-picker";
 
 export default function CreateEmployeeForm() {
     const router = useRouter();
