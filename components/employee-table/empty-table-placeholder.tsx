@@ -1,5 +1,5 @@
+import Logo from "@/components/logo";
 import { useModal } from "@/providers/modal-provider";
-import Logo from "./logo";
 
 export default function EmptyTablePlaceholder() {
     const { setOpen } = useModal();

@@ -1,23 +1,15 @@
 "use client";
 
-import * as React from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "@/lib/utils";
-
-import {
-    Command,
-    CommandGroup,
-    CommandItem,
-    CommandList,
-} from "@/components/ui/command";
+import { useState } from "react";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "./ui/button";
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { Command, CommandList } from "@/components/ui/command";
 import { useEmployeeTable } from "@/providers/employee-table-provider";
 
 const rowsPerPage = [

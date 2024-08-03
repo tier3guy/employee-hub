@@ -3,7 +3,7 @@
 import Topbar from "@/components/topbar";
 import { Sheet } from "@/components/ui/sheet";
 import { useModal } from "@/providers/modal-provider";
-import EmployeeTable from "@/components/employee-table/employee-table";
+import EmployeeTable from "@/components/employee-table";
 import CreateTaskSheet from "@/components/create-task-sheet";
 import EmployeeProvider from "@/providers/employee-table-provider";
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
     Table,
     TableBody,
@@ -8,13 +9,12 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import Badge from "./badge";
-import TableFooter from "./table-footer";
 import { Eye } from "lucide-react";
-import Link from "next/link";
-import { useEmployeeTable } from "@/providers/employee-table-provider";
-import TableRowsLoader from "./loaders/table-rows-loader";
+import Badge from "@/components/badge";
+import TableFooter from "./table-footer";
 import EmptyTablePlaceholder from "./empty-table-placeholder";
+import TableRowsLoader from "@/components/loaders/table-rows-loader";
+import { useEmployeeTable } from "@/providers/employee-table-provider";
 
 export default function EmployeeTable() {
     const { employeeList: data, loading } = useEmployeeTable();
