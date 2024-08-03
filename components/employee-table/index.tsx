@@ -28,18 +28,10 @@ export default function EmployeeTable() {
                         <TableRow>
                             <TableHead>EID</TableHead>
                             <TableHead>Employee Name</TableHead>
-                            <TableHead className="hidden md:block">
-                                Role
-                            </TableHead>
-                            <TableHead className="hidden md:block">
-                                Department
-                            </TableHead>
-                            <TableHead className="hidden md:block">
-                                Date of Joining
-                            </TableHead>
-                            <TableHead className="w-[100px] hidden md:block">
-                                Status
-                            </TableHead>
+                            <TableHead>Role</TableHead>
+                            <TableHead>Department</TableHead>
+                            <TableHead>Date of Joining</TableHead>
+                            <TableHead className="w-[100px]">Status</TableHead>
                             <TableHead className="text-right">Action</TableHead>
                         </TableRow>
                     </TableHeader>
@@ -56,16 +48,10 @@ export default function EmployeeTable() {
                                     <TableCell>
                                         {emp?.first_name + " " + emp?.last_name}
                                     </TableCell>
-                                    <TableCell className="hidden md:block">
-                                        {emp.position}
-                                    </TableCell>
-                                    <TableCell className="hidden md:block">
-                                        {emp.department}
-                                    </TableCell>
-                                    <TableCell className="hidden md:block">
-                                        {emp.date_of_joining}
-                                    </TableCell>
-                                    <TableCell className="hidden md:block">
+                                    <TableCell>{emp.position}</TableCell>
+                                    <TableCell>{emp.department}</TableCell>
+                                    <TableCell>{emp.date_of_joining}</TableCell>
+                                    <TableCell>
                                         <Badge type={emp.status} />
                                     </TableCell>
                                     <TableCell className="flex items-center justify-end gap-2">
